@@ -2,3 +2,5 @@
 TU/e PDEng Mechatronics Systems Design - Module 2
 
 This project is documented in our Wiki: http://cstwiki.wtb.tue.nl/index.php?title=Drone_Referee_-_MSD_2017/18
+
+For access to additional files and the private Gitlab workspace, contact a.kamath@tue.nl
