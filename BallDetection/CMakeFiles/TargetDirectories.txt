@@ -1,0 +1,3 @@
+/home/drone/Desktop/BallDetection/CMakeFiles/rebuild_cache.dir
+/home/drone/Desktop/BallDetection/CMakeFiles/edit_cache.dir
+/home/drone/Desktop/BallDetection/CMakeFiles/main.dir

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<opencv_storage>
+<calibration_time>"za 06 mei 2017 13:26:35 CEST"</calibration_time>
+<image_width>1024</image_width>
+<image_height>768</image_height>
+<flags>0</flags>
+<camera_matrix type_id="opencv-matrix">
+  <rows>3</rows>
+  <cols>3</cols>
+  <dt>d</dt>
+  <data>
+    3.7918575178239792e+02 0. 5.3356290001110233e+02 0.
+    3.7864655128944844e+02 3.7715032550746349e+02 0. 0. 1.</data></camera_matrix>
+<distortion_coefficients type_id="opencv-matrix">
+  <rows>1</rows>
+  <cols>5</cols>
+  <dt>d</dt>
+  <data>
+    -2.8806240852107684e-01 7.0975791614964603e-02
+    -5.2679420299604274e-04 -4.4826680006297226e-04
+    -7.1377250376219838e-03</data></distortion_coefficients>
+<avg_reprojection_error>1.2817100554014482e+00</avg_reprojection_error>
+</opencv_storage>
