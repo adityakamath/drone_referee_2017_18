@@ -1,0 +1,59 @@
+# depslib dependency file v1.0
+1520264917 source:c:\users\s158719\downloads\2017_02_08_c_example\2017_02_08_c_example\source\example.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<windows.h>
+	<unistd.h>
+	<signal.h>
+	"marvelmind.h"
+	<time.h>
+
+1520263145 
+
+1520263145 c:\users\s158719\downloads\2017_02_08_c_example\2017_02_08_c_example\source\marvelmind.h
+	<stdint.h>
+	<stdbool.h>
+	<stddef.h>
+
+1520263194 source:c:\users\s158719\downloads\2017_02_08_c_example\2017_02_08_c_example\source\marvelmind.c
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<process.h>
+	<unistd.h>
+	<termios.h>
+	<fcntl.h>
+	<pthread.h>
+	"marvelmind.h"
+
+1520263194 d.h"
+
+1520263194 source:/home/robocup/Documents/C/Marvelmind/2017_02_08_C_example/2017_02_08_C_example/source/marvelmind.c
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<process.h>
+	<unistd.h>
+	<termios.h>
+	<fcntl.h>
+	<pthread.h>
+	"marvelmind.h"
+
+1520263145 /home/robocup/Documents/C/Marvelmind/2017_02_08_C_example/2017_02_08_C_example/source/marvelmind.h
+	<stdint.h>
+	<stdbool.h>
+	<stddef.h>
+
+1520265004 source:/home/robocup/Documents/C/Marvelmind/2017_02_08_C_example/2017_02_08_C_example/source/example.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<windows.h>
+	<unistd.h>
+	<signal.h>
+	"marvelmind.h"
+	<time.h>
+

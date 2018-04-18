@@ -1,0 +1,15 @@
+
+
+1) Make sure that you are connected to the robocup network (MSL_FIELD_A_a) 
+
+2) Make sure that the root user has the environment variable AGENT set to a number between 11 and 30
+
+	> export AGENT=11
+
+3) Start the process "listen" on your laptop at the wireless interface (as root, in a terminal where the AGENT variable is set)
+
+	> listen <your wireless interface>
+
+4) Start the example (as root, in a terminal where the AGENT variable is set)
+
+	> ./example

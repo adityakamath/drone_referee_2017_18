@@ -1,0 +1,1 @@
+gcc -o applisten applisten.c multicast.c ../rtdb/rtdb_api.c ../rtdb/rtdb_sem.c udp_client.c -lpthread

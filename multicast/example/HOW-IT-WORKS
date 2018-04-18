@@ -1,0 +1,116 @@
+
+NOTES FOR EVERY-ONE:
+The multicast folder comprises a shared memory based Real Time Data Base (RTDB) and
+applications to share records from this database with other AGENTS using multicast communication.
+
+ARCHITECTURE
+
+RTDB is a database consisting local and shared records. Both type of records are
+stored in shared memory and can be accessed by any application on a local machine.
+The data of shared records is synced between all agents within the network that run "comm".
+This implies that each agent in the network has one instance of RTDB containing the local records
+and shared records of that specific agent, to be written and read. Besides that, the RTDB
+instance contains one shared records set for any other agent in the network (MAX_AGENTS).
+The shared records of other agents are synchronized between all agents using UDP multicast
+implemented in "comm". Since the records of all other agents are updated with data from peers,
+these records are locally read-only. 
+
+The local instance of RTDB is instantiated by the first application calling DB_init().
+
+RELEVANT APPLICATIONS:
+comm   	synchronizes the shared records with other agents, broadcasts own shared records, and
+		receives data from other agents. Runs at a fixed rate defined in network.conf.
+		
+listen  Listens to other agents to update the peer-data in the local RTDB instance. This application
+		does not send any data, hence is very useful for diagnostics and feedback without interfering
+		the network.
+		
+scomm  	Application replacing comm in a local simulation enviromnent where multiple agents (each having 
+		their own RTDB instance) are running on the same machine.
+
+What is communicated by who:
+
+ For each turtle and the base station, you can specify
+  1. Which data it keeps local in shared memory and which data is broadcasted
+   -> This info is only used by the comm program to know what to do.
+   You can specify on a per-turtle basis, or for the turtles as a whole.
+   Typically, this is different for base station versus turtle. 
+   For example:
+   The base-station broadcasts the coach commands, while the turtles keep these
+   local ! (you don't want to re-broadcast that).
+  2. What the data looks like. You need to describe all your data in
+     fixed length structs (so no pointers).
+  3. At which period each data sample is exchanged.
+    The period is only relevant for the 'comm' application. And is to be
+    interpreted as a multiple of 100ms. Likely, we will lower this number
+    in order to have higher communication frequencies.
+
+NOTES FOR APPLICATION CODERS:
+    
+Coding Workflow:
+
+ For extending this example. You need to:
+ 1. Declare the struct you want to communicate (in a new or existing header).
+    -> We do this in the directory "multicast/worldmodel"
+ 2. Extend the "multicast/config/rtdb.conf" file and add this struct 
+    (and the header where it's defined) as an ITEM in that file.
+ 3. Add the new ITEM to an existing SCHEMA (turtle or base station).
+ 4. From the 'bin' directory, run 'xrtdb', which reads the rtdb.conf file
+    and generates an config/rtdb.ini and rtdb/rtdb_user.h file. 
+    The latter two are used by every application
+    to learn the structure and data sizes of the database.
+ 5. Extend your application, include <rtdb/rtdb_user.h> and <rtdb/rtdb_api.h> 
+    and use DB_put and DB_get to exchange the new struct.
+ 6. Make sure all turtles and base station receive this new rtdb.ini file
+    and were compiled with the new rtdb_user.h file.
+
+Compiling Workflow:
+ 0. Make sure you have bison and flex installed.
+ 1. There is a top level Makefile which must be make'd.
+ 2. The result is in bin/ and lib/ and contains the comm, xrtdb programs
+ and the librtdb.so files.
+ 3. the librtdb.so file should be installed in /usr/local/lib
+ So do a 'make install'
+ 4. User applications should link with -lrtdb and include 
+ rtdb/rtdb_user.h and rtdb/rtdb_api.h
+
+Running Workflow:
+
+  In order to get the applications running. Do the following:
+  1. Set the AGENT environment variable to the turtle number (>10 for coach).
+  2. Start your applications and the comm program, in any order. 
+    
+Hardcoded stuff:
+ 
+ The configuration is spread over some files. This lists all hard-coded
+ stuff I know about and where to find/change it:
+
+ * AGENT env variable: At various places. Don't change this.
+ * UDP Multicast address and port: comm/comm_multicast-[cyan|magenta].h
+   and comm/multicast.h. It's unclear why this was done as such.
+   The address is different for each color. Both teams work on the same port number.
+   TODO: This needs to be changed for the new Robocup rules: 1 multicast address
+   for the tech united team.
+ * Team color: Each team should use another port. This will allow 3-vs-3 games
+   of TU bots.
+   TODO: This is not implemented yet.
+ * Max number of bytes in a transmission:
+    in comm.c:#define BUFFER_SIZE 1000
+   The comm client will most likely crash if you exceed this number. Don't know
+   why they didn't malloc it...
+ * Location of header files (for structs): 
+ 	in rtdb/parser/rtdb_configuration.h:#define CFLAGS "-Wall -I../ -I../include/ -I../worldmodel" 
+ * Location of rtdb.ini file: 
+ 	in rtdb/rtdbdefs.h:#define CONFIG_FILE	"../config/rtdb.ini"
+ 	in rtdb/parser/rtdb_configuration.h:#define RTDB_INI "../config/rtdb.ini"
+ * Location of rtdb.conf file:
+    in rtdb/parser/rtdb_configuration.h:#define RTDB_CONF "../config/rtdb.conf"
+
+ Internals:
+ 
+ Random notes about how stuff works inside the multicast code base.
+ 
+  * The comm.c application does not use the DB_get/put API but a slightly
+    lower level DB API which allows to preserve the timestamps. See rtdb_comm.h
+  * comm.c knows about RTDBconf_var, which is the record struct (one record for each 
+    data type exchanged). If you change this in rtdb, you need to adapt comm.c as well.
