@@ -1,7 +1,23 @@
 # drone_referee_2017_18
 TU/e PDEng Mechatronics Systems Design - Module 2
 
-This project is documented in our Wiki: http://cstwiki.wtb.tue.nl/index.php?title=Drone_Referee_-_MSD_2017/18
+This project was based on the drone designed by Peter Rooijakkers for his Master Thesis. This document is titled **Rooijakkers_PLM_2017_Design and Control of a Quad-Rotor.pdf**
+This project is documented in our Wiki: **http://cstwiki.wtb.tue.nl/index.php?title=Drone_Referee_-_MSD_2017/18**
+
+## Directory Structure:
+
+Ball Detection
+  -- Codes for ball detection
+multicast
+  -- Codes for connecting to and accessing the world model from the Tech United robots
+Global_Par
+  -- Dependencies for multicast
+Marvelmind
+  -- Codes to read data from marvelmind beacons fixed on the drone 
+udp_test
+  -- Codes to test UDP connection over LAN and over a remote network
+src
+  -- Miscellaneous codes for ball detection, aruco marker detection, player tracking, etc. 
 
 ## Accessing World Model of the robots:
 
