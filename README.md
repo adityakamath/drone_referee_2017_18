@@ -3,7 +3,7 @@ TU/e PDEng Mechatronics Systems Design - Module 2
 
 This project was based on the drone designed by Peter Rooijakkers for his Master Thesis. This document is titled **Rooijakkers_PLM_2017_Design and Control of a Quad-Rotor.pdf** (in this repository)
 
-Executive Summary: **to be added** 
+Executive Summary: **Executive summary -Drone Referee MSD.pdf** (in this repository)
 
 Documentation (CST Wiki): **http://cstwiki.wtb.tue.nl/index.php?title=Drone_Referee_-_MSD_2017/18**
 
